@@ -8,70 +8,38 @@ import java.util.List;
 import Llamadas.Llamada;
 
 public class Facturacion {
+	/**
+     * Esta sera la clase de la facturación, aqui se podra saber el abono total, imprimir en pantalla la factura completa y registrar llamadas solo si fueron realizadas
+     * en el mes correspondiente.
+     */
 
 	private List <Llamada> llamadasRealizadas;
 	private BigDecimal abonoMensual;
-	private LocalDateTime fechaActual;
 	private Month mesFactura;
 	
 	public Facturacion (BigDecimal abono) {
 		
 		llamadasRealizadas= new ArrayList <Llamada>();
 		abonoMensual = abono;
-		fechaActual= LocalDateTime.now();
-		mesFactura= fechaActual.getMonth();
+		mesFactura= LocalDateTime.now().getMonth();
 		
 			
-	}
-/*
-	public BigDecimal abonoNacionalTotal() {
-		BigDecimal res= new BigDecimal(0.0);
-		
-		for (int i=0; i < llamadasNacionales.size(); i++) {
-			
-			res= res.add(llamadasNacionales.get(i).costoLlamada());
-		}
-		
-		return res;
-		
 	}
 
-	public BigDecimal abonoInternacionalTotal() {
-		// TODO Auto-generated method stub
-		BigDecimal res= new BigDecimal(0.0);
-		
-		for (int i=0; i < llamadasInternacionales.size(); i++) {
-			
-			res= res.add(llamadasInternacionales.get(i).costoLlamada());
-		}
-		
-		return res;
-	}
-
-	public BigDecimal abonoLocalTotal() {
-		// TODO Auto-generated method stub
-		BigDecimal res= new BigDecimal(0.0);
-		
-		for (int i=0; i < llamadasLocales.size(); i++) {
-			
-			res= res.add(llamadasLocales.get(i).costoLlamada());
-		}
-		
-		return res;
-		
-	}
-*/
 	public BigDecimal getAbonoMensual() {
 		// TODO Auto-generated method stub
 		return this.abonoMensual;
 		
 	}
+	/**
+     * Este metodo nos permitirá saber el abono total que se pagara a fin de mes. El costo se calculara en base a todas las llamadas registradas
+     * sumadas a el abono mensual fijo.
+     * 
+     */
 	
 	public BigDecimal getAbonoTotal() {
 		
-		
-		//(this.abonoNacionalTotal().add(this.abonoInternacionalTotal()).add(this.abonoLocalTotal()));
-				BigDecimal res= new BigDecimal(0.0);
+		BigDecimal res= new BigDecimal(0.0);
 		
 		for (int i=0; i < llamadasRealizadas.size(); i++) {
 			
@@ -82,18 +50,26 @@ public class Facturacion {
 		
 	}
 	
-	
+	/**
+     * Este metodo nos permitira registrar llamadas solo si estas fueron realizadas en el mes correspondiente de la facturacion.
+     * 
+     */
 	
 	public void agregarLlamada(Llamada llamada) {
 		
 		if (llamada.fechaRealizada().getMonth() == this.mesFactura) {
 			  this.llamadasRealizadas.add(llamada);
 		}
-		else {
-			//arrojar error
-		}
 	}
-	
+	/**
+     * Este metodo imprimira la factura sabiendo:
+     * -La fecha y hora en la que fue realizada las llamadas
+     * -El destino de las llamadas
+     * -La duracion en minutos de la llamada
+     * -El costo singular de cada llamada.
+     * -El abono mensual fijo
+     * -El costo total de la factura
+     */
 	public void imprimirFactura() {
 		
 		System.out.println("----------------------------Factura mes de "+ this.mesFactura +" ----------------------------");

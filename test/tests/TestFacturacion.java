@@ -17,12 +17,12 @@ import Llamadas.LlamadaLocal;
 import Llamadas.LlamadaNacional;
 
 
-class test1 {
+class TestFacturacion {
 
 	private LlamadaLocal llamadaLocal;
 	private LlamadaLocal llamadaLocal2;
 	private LlamadaLocal llamadaLocal3;
-	private LlamadaLocal llamadaMockLocal;
+
 	private LlamadaNacional llamadaNacional;
 	private LlamadaNacional llamadaNacional2;
 	private LlamadaNacional llamadaNacional3;
@@ -52,21 +52,20 @@ class test1 {
 		llamadaInternacional3= new LlamadaInternacional("Inglaterra", new BigDecimal("10.50"), 4);
 		
 		
-		LocalDateTime lt = LocalDateTime.parse("2021-11-18T19:34:50.63");
-		
-		
-		llamadaMockLocal= mock(LlamadaLocal.class);
-		when(llamadaMockLocal.duracionLlamada()).thenReturn(10);
-		when(llamadaMockLocal.fechaRealizada()).thenReturn(lt);
-		
 		facturacion= new Facturacion(new BigDecimal("500.00"));
+		
+		
+		facturacion.agregarLlamada(llamadaLocal);
+		facturacion.agregarLlamada(llamadaLocal2);
+		facturacion.agregarLlamada(llamadaLocal3);
+		facturacion.agregarLlamada(llamadaNacional);
+		facturacion.agregarLlamada(llamadaInternacional);
 
 		
 	}
-	
+
 	@Test
 	void testLlamadaNacional() {
-		//assertEquals(llamadaLocal.costoLlamada(), 0.50); //funciona bien la llamada local
 		assertEquals(llamadaNacional.costoLlamada(), new BigDecimal("5.00"));
 		assertEquals(llamadaNacional2.costoLlamada(), new BigDecimal("2.00"));
 		assertEquals(llamadaNacional3.costoLlamada(), new BigDecimal("2.10"));
@@ -79,28 +78,62 @@ class test1 {
 		assertEquals(llamadaInternacional3.costoLlamada(), new BigDecimal("42.00"));
 		
 	}
+	
+	/**
+     * Como el costo de la llamada depende del dia y horario implemente un test para cada caso
+     * 
+     * 	|
+     * 	|
+     * 	v
+     * 
+     */
+	
+	/**
+     * En el caso de que sea día habil (Lunes a viernes) dentro del rango de las 8 y 20, este test sera el correcto
+     * 
+     */
 	@Test
-	void testLlamadaLocal() { //mockear
-		//LocalDateTime lt = LocalDateTime.parse("2021-11-18T19:34:50.63");
-		//when(llamadaMockLocal.duracionLlamada()).thenReturn(10);
-		//when(llamadaMockLocal.fechaRealizada()).thenReturn(lt);
-		//assertEquals(llamadaMockLocal.costoLlamada(), new BigDecimal("0.80"));
+	void testLlamadaLocalDentroDeUnDiaHabilDe8a20() { 
+		assertEquals(llamadaLocal.costoLlamada(), new BigDecimal("1.40"));
+		assertEquals(llamadaLocal2.costoLlamada(), new BigDecimal ("0.80"));
+		assertEquals(llamadaLocal3.costoLlamada(), new BigDecimal ("1.20"));
+
+	}
+	/**
+     * En el caso de que sea fin de semana o dia habil fuera del rango este test sera el correcto
+     * 
+     */
+	@Test
+	void testLlamadaLocalEnUnFinDeSemanaOFueraDelRango() { 
 		assertEquals(llamadaLocal.costoLlamada(), new BigDecimal("0.80"));
 		assertEquals(llamadaLocal2.costoLlamada(), new BigDecimal ("0.50"));
 		assertEquals(llamadaLocal3.costoLlamada(), new BigDecimal ("0.70"));
 
 	}
+	
+	/**
+     * Lo mismo sucedera en este test, en el caso de que sea dia habil dentro del rango mencionado anteriormente, este sera el correcto
+     * 
+     */
 	@Test
-	void testFacturacion() {
-		facturacion.agregarLlamada(llamadaLocal);
-		facturacion.agregarLlamada(llamadaLocal2);
-		facturacion.agregarLlamada(llamadaLocal3);
-		facturacion.agregarLlamada(llamadaNacional);
-		facturacion.agregarLlamada(llamadaInternacional);
-		facturacion.agregarLlamada(llamadaLocal3);
+	void testFacturacionDiaHabil() {
+
 		facturacion.imprimirFactura();
 		assertEquals(facturacion.getAbonoMensual(), new BigDecimal("500.00"));
-		assertEquals(facturacion.getAbonoTotal(), new BigDecimal("517.70"));
+		assertEquals(facturacion.getAbonoTotal(), new BigDecimal("518.40"));
+
+	}
+	
+	/**
+     * En el caso de que sea fin de semana, o dia habil fuera del rango, este test sera el correcto
+     * 
+     */
+	@Test
+	void testFacturacionFinDeSemanaOFueraDelRango() {
+
+		
+		assertEquals(facturacion.getAbonoMensual(), new BigDecimal("500.00"));
+		assertEquals(facturacion.getAbonoTotal(), new BigDecimal("517.00"));
 
 	}
 

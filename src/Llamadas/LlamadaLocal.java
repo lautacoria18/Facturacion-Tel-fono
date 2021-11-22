@@ -6,17 +6,28 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public class LlamadaLocal extends Llamada {
-
-
-
+	/**
+     * Clase concreta creada para las llamadas locales, estas tendran un costo por minuto diferente dependiendo del día y de la franja horaria.
+     *  
+     */
 	
+
+
+	/**
+     * Constructor para la clase, mismo comportamiento que el de la superclase.
+     * 
+     */
 	public LlamadaLocal(Integer duracion) {
 
 		super(duracion);
-		this.fechaRealizada= LocalDateTime.parse("2019-03-27T07:58:30"); //funcioann bien ambos casos hay que emproli
+		//this.fechaRealizada= LocalDateTime.parse("2021-11-17T07:58:30"); //funcioann bien ambos casos hay que emproli
 		
 	}
-	
+	/**
+     * En este metodo recorremos con un "for loop" los minutos donde transcurrió la llamada.
+     * Dentro de la variable "res" vamos acumulando los costo de cada minuto, y luego, lo retornamos.
+     *  
+     */
 	@Override
 	public BigDecimal costoLlamada() {
 		// TODO Auto-generated method stub
@@ -36,8 +47,15 @@ public class LlamadaLocal extends Llamada {
 		
 	}
 
-	
-	
+	/**
+     * En este metodo decidi implementar un switch case consultando el día que se realizo la llamada.
+     * El caso por default es cuando la llamada se realizo dentro de un dia habil: con un condicional preguntamos si la hora que se 
+     * realizó la llamada esta dentro del rango de las 8:00 - 20:00, si esta dentro de ese, se cobra $0.20. En cualquier otro caso
+     * se cobra $0.10 el minuto
+     * 
+     *  
+     */
+
 	public BigDecimal costoDelMinuto(LocalDateTime minuto) {
 		
 		LocalTime rangoInicial= LocalTime.parse("08:00:00"); 
@@ -78,11 +96,17 @@ public class LlamadaLocal extends Llamada {
 		
 	}
 
+	/**
+     * Como es una llamada local, la ciudad destino será la ciudad local.
+     *  
+     */
+	
 	@Override
 	public String destinoLlamada() {
 		// TODO Auto-generated method stub
 		return "Ciudad local";
 	}
+
 
 
 	

@@ -3,12 +3,21 @@ import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 public class LlamadaInternacional extends Llamada {
+	
+	/**
+     * Clase concreta creada para las llamadas internacionales,  estas tendran un costo por minuto dependiendo el país.
+     *  
+     */
 
 	
 	private String paisLlamada;
 	private BigDecimal costoPorMinuto;
 
-
+	/**
+     * Constructor para la clase, ademas de la duracion, esta vez se asignara un parametro string que sera el pais donde se llamó
+     * y el costo por minuto.
+     * 
+     */
 	public LlamadaInternacional(String pais, BigDecimal costo, Integer duracion) {
 		
 		super(duracion);
@@ -16,6 +25,10 @@ public class LlamadaInternacional extends Llamada {
 		this.costoPorMinuto= costo;
 
 	}
+	/**
+     * Para calcular el costo de la llamada simplemente multiplicamos el costo por minuto por la cantidad de minutos que duró la llamada
+     *  
+     */
 	
 	@Override
 	public BigDecimal costoLlamada() {
