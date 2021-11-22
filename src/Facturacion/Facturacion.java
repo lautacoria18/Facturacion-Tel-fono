@@ -32,7 +32,7 @@ public class Facturacion {
 			res= res.add(llamadasNacionales.get(i).costoLlamada());
 		}
 		
-		return res;
+		return res
 		
 	}
 
