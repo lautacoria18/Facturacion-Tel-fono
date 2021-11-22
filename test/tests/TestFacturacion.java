@@ -54,12 +54,11 @@ class TestFacturacion {
 		
 		facturacion= new Facturacion(new BigDecimal("500.00"));
 		
-		
-		facturacion.agregarLlamada(llamadaLocal);
-		facturacion.agregarLlamada(llamadaLocal2);
-		facturacion.agregarLlamada(llamadaLocal3);
-		facturacion.agregarLlamada(llamadaNacional);
-		facturacion.agregarLlamada(llamadaInternacional);
+		facturacion.registrarLlamada(llamadaLocal);
+		facturacion.registrarLlamada(llamadaLocal2);
+		facturacion.registrarLlamada(llamadaLocal3);
+		facturacion.registrarLlamada(llamadaNacional);
+		facturacion.registrarLlamada(llamadaInternacional);
 
 		
 	}
@@ -94,9 +93,9 @@ class TestFacturacion {
      */
 	@Test
 	void testLlamadaLocalDentroDeUnDiaHabilDe8a20() { 
-		assertEquals(llamadaLocal.costoLlamada(), new BigDecimal("1.40"));
-		assertEquals(llamadaLocal2.costoLlamada(), new BigDecimal ("0.80"));
-		assertEquals(llamadaLocal3.costoLlamada(), new BigDecimal ("1.20"));
+		assertEquals(llamadaLocal.costoLlamada(), new BigDecimal("1.60"));
+		assertEquals(llamadaLocal2.costoLlamada(), new BigDecimal ("1.00"));
+		assertEquals(llamadaLocal3.costoLlamada(), new BigDecimal ("1.40"));
 
 	}
 	/**
@@ -118,9 +117,9 @@ class TestFacturacion {
 	@Test
 	void testFacturacionDiaHabil() {
 
-		facturacion.imprimirFactura();
+		facturacion.imprimirFacturaEnPantalla();
 		assertEquals(facturacion.getAbonoMensual(), new BigDecimal("500.00"));
-		assertEquals(facturacion.getAbonoTotal(), new BigDecimal("518.40"));
+		assertEquals(facturacion.getCostoTotal(), new BigDecimal("519.00"));
 
 	}
 	
@@ -133,7 +132,7 @@ class TestFacturacion {
 
 		
 		assertEquals(facturacion.getAbonoMensual(), new BigDecimal("500.00"));
-		assertEquals(facturacion.getAbonoTotal(), new BigDecimal("517.00"));
+		assertEquals(facturacion.getCostoTotal(), new BigDecimal("517.00"));
 
 	}
 

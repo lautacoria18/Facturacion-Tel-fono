@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Llamadas.Llamada;
+import Llamadas.LlamadaLocal;
 
 public class Facturacion {
 	/**
@@ -37,8 +38,8 @@ public class Facturacion {
      * 
      */
 	
-	public BigDecimal getAbonoTotal() {
-		
+	public BigDecimal getCostoTotal() {
+		// TODO Auto-generated method stub
 		BigDecimal res= new BigDecimal(0.0);
 		
 		for (int i=0; i < llamadasRealizadas.size(); i++) {
@@ -55,11 +56,11 @@ public class Facturacion {
      * 
      */
 	
-	public void agregarLlamada(Llamada llamada) {
-		
+	public void registrarLlamada(Llamada llamada) {
+		// TODO Auto-generated method stub
 		if (llamada.fechaRealizada().getMonth() == this.mesFactura) {
 			  this.llamadasRealizadas.add(llamada);
-		}
+	}
 	}
 	/**
      * Este metodo imprimira la factura sabiendo:
@@ -70,8 +71,10 @@ public class Facturacion {
      * -El abono mensual fijo
      * -El costo total de la factura
      */
-	public void imprimirFactura() {
-		
+
+
+	public void imprimirFacturaEnPantalla() {
+		// TODO Auto-generated method stub
 		System.out.println("----------------------------Factura mes de "+ this.mesFactura +" ----------------------------");
 		
 		llamadasRealizadas.stream().forEach((l)-> { 
@@ -81,9 +84,12 @@ public class Facturacion {
 		System.out.println("---------------------------------------------------------------------------------");
 		System.out.println("					       		Costo abono mensual: 	  $" + this.getAbonoMensual());
 		System.out.println("---------------------------------------------------------------------------------");
-		System.out.println("					       		Costo total de la factura: $" +  this.getAbonoTotal());
+		System.out.println("					       		Costo total de la factura: $" +  this.getCostoTotal());
 		
 	}
+
+
+
 	
 	
 
