@@ -7,7 +7,7 @@ import java.time.LocalTime;
 
 public class LlamadaLocal extends Llamada {
 	/**
-     * Clase concreta creada para las llamadas locales, estas tendran un costo por minuto diferente dependiendo del día y de la franja horaria.
+     * Subclase creada para las llamadas locales, estas tendran un costo por minuto diferente dependiendo del día y de la franja horaria.
      *  
      */
 	

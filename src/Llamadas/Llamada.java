@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public abstract class Llamada {
 	
 	/**
-     * Esta sera la superclase de la Llamada
+     * Superclase de la llamada
      * 
      */
 

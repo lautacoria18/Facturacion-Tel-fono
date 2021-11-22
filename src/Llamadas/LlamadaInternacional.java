@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 public class LlamadaInternacional extends Llamada {
 	
 	/**
-     * Clase concreta creada para las llamadas internacionales,  estas tendran un costo por minuto dependiendo el país.
+     * Subclase creada para las llamadas internacionales,  estas tendran un costo por minuto dependiendo el país.
      *  
      */
 

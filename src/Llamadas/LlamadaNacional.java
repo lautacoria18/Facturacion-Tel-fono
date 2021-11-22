@@ -7,7 +7,7 @@ import java.util.Map;
 
 public class LlamadaNacional extends Llamada {
 	/**
-     * Clase concreta creada para las llamadas nacionales, estas tendran un costo por minuto dependiendo de la localidad.
+     * Subclase creada para las llamadas nacionales, estas tendran un costo por minuto dependiendo de la localidad.
      *  
      */
 	
